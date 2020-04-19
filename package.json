@@ -1,10 +1,13 @@
 {
-  "name": "fresh-resume-schema",
-  "version": "1.0.0-beta",
+  "name": "@LolPointerException/fresh-resume-schema",
+  "version": "1.0.0",
   "description": "The FRESH schema for resumes and CVs.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fresh-standard/fresh-resume-schema.git"
+    "url": "https://github.com/LolPointerException/fresh-resume-schema.git"
+  },
+  "scripts": {
+    "test": "ajv validate -s schema/fresh-resume-schema_1.0.0.json -d test.json"
   },
   "keywords": [
     "resume",
@@ -18,12 +21,12 @@
     "JSON",
     "employment"
   ],
-  "author": "hacksalot <hacksalot@indevious.com> (https://indevious.com)",
+  "author": "hacksalot, colinfwren",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fresh-standard/fresh-resume-schema/issues"
+    "url": "https://github.com/LolPointerException/fresh-resume-schema/issues"
   },
-  "main": "schema/fresh-resume-schema_1.0.0-beta.json",
+  "main": "schema/fresh-resume-schema_1.0.0.json",
   "homepage": "https://resume.freshstandard.org",
   "ignore": [
     "**/.*",
@@ -31,5 +34,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "ajv": "6.12.1",
+    "ajv-cli": "3.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
