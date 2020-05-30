@@ -1,0 +1,198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "cv-schema_1.0.0.json",
+  "title": "CV Schema",
+  "type": "object",
+  "required": ["name", "data", "analysis"],
+  "additionalProperties": true,
+  "definitions": {
+    "sectionItem": {
+      "$id": "#sectionItem",
+      "type": "object",
+      "title": "Section Item",
+      "description": "Reference to resume item to display",
+      "additionalProperties": true,
+      "required": [
+        "enabled", "version"
+      ],
+      "properties": {
+        "itemType": {
+          "type": "string",
+          "enum": [
+            "name",
+            "info",
+            "contact",
+            "location",
+            "employment",
+            "service",
+            "skills.set",
+            "projects",
+            "social",
+            "writing",
+            "reading",
+            "speaking",
+            "governance",
+            "extracurricular", 
+            "affiliation",
+            "sample"
+          ],
+          "description": "The type of item, used for defining which collection to read from for fields mapped to multiple collections"
+        },
+        "itemId": {
+          "type": "string",
+          "description": "The ID of the item, used to defining the item in an collection array"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the item is to be included in the CV"
+        },
+        "version": {
+          "type": "string",
+          "description": "ID of the version to use in the CV for the item"
+        }
+      }
+    },
+    "section": {
+      "$id": "#section",
+      "type": "object",
+      "title": "CV section",
+      "description": "Section in the CV, contains items used to render in the CV",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Is the section shown in the CV"
+        },
+        "heading": {
+          "type": "string",
+          "description": "Heading for the section (editable)"
+        },
+        "items": {
+          "type": "array",
+          "description": "Items under the section",
+          "items": {
+            "$ref": "#sectionItem"
+          }
+        }
+      }
+    },
+    "gaps": {
+      "$id": "#gaps",
+      "type": "object",
+      "description": "Gap analysis results",
+      "additionalProperties": true,
+      "properties": {
+        "duration": {
+          "type": "object",
+          "description": "Summary of days worked and total days covereed by CV",
+          "additionalProperties": true,
+          "properties": {
+            "gaps": {
+              "type": "integer",
+              "description": "Total number of days missing"
+            },
+            "total": {
+              "type": "integer",
+              "description": "Total number of days covered by CV"
+            },
+            "work": {
+              "type": "integer",
+              "description": "Total number of days worked"
+            }
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "description": "More information on gaps",
+          "items": { "$ref": "#gap" }
+        },
+        "pct": {
+          "type": "string",
+          "description": "A percentage of days worked vs total days covered"
+        }
+      }
+    },
+    "gap": {
+      "$id": "#gap",
+      "type": "object",
+      "description": "Gap information",
+      "additionalProperties": true,
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "Start date of the gap"
+        },
+        "end": {
+          "type": "string",
+          "description": "End date of the gap"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "The number of days in the gap"
+        }
+      }
+    },
+    "jobSpecMatch": {
+      "$id": "#jobSpecMatch",
+      "type": "object",
+      "description": "Data from the job specification matching service",
+      "additionalProperties": true,
+      "properties": {
+        "accuracy": {
+          "type": "number",
+          "description": "How accurately the CV meets the job specification"
+        },
+        "jobSpec": {
+          "type": "string",
+          "description": "Job specification"
+        }
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name for the CV"
+    },
+    "data": {
+      "type": "object",
+      "description": "Data for the CV",
+      "additionalProperties": true,
+      "required": [
+        "profile",
+        "objective",
+        "work",
+        "education",
+        "awards",
+        "certifications",
+        "skills",
+        "hobbies",
+        "languages",
+        "references",
+        "extras"
+      ],
+      "properties": {
+        "profile": { "$ref": "#section" },
+        "objective": { "$ref": "#section" },
+        "work": { "$ref": "#section" },
+        "education": { "$ref": "#section" },
+        "awards": { "$ref": "#section" },
+        "certifications": { "$ref": "#section" },
+        "skills": { "$ref": "#section" },
+        "hobbies": { "$ref": "#section" },
+        "languages": { "$ref": "#section" },
+        "references": { "$ref": "#section" },
+        "extras": { "$ref": "#section" }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "description": "Data about the CV generated from Analysis tools",
+      "additionalProperties": true,
+      "required": ["gaps", "jobSpecMatch"],
+      "properties": {
+        "gaps": { "$ref": "#gaps" },
+        "jobSpecMatch": { "$ref": "#jobSpecMatch" }
+      }
+    }
+  }
+}

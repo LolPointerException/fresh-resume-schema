@@ -7,7 +7,10 @@
     "url": "https://github.com/LolPointerException/fresh-resume-schema.git"
   },
   "scripts": {
-    "test": "ajv validate -s schema/fresh-resume-schema_1.0.0.json -d test.json"
+    "test": "ajv validate -s schema/fresh-resume-schema_1.0.0.json -d test.json",
+    "test:resume": "ajv validate -s schema/resume-schema_1.0.0.json -d examples/resume.newFormat.json",
+    "test:cv": "ajv validate -s schema/cv-schema_1.0.0.json -d examples/cv.newFormat.json",
+    "test:doc": "ajv validate -s schema/doc-schema_1.0.0.json -d examples/doc.newFormat.json"
   },
   "keywords": [
     "resume",
