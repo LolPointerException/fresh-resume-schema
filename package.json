@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "ajv validate -s schema/fresh-resume-schema_1.0.0.json -d test.json",
-    "test:resume": "ajv validate -s schema/resume-schema_1.0.0.json -d examples/resume.newFormat.json",
-    "test:cv": "ajv validate -s schema/cv-schema_1.0.0.json -d examples/cv.newFormat.json",
-    "test:doc": "ajv validate -s schema/doc-schema_1.0.0.json -d examples/doc.newFormat.json"
+    "test:resume": "ajv validate -s schema/resume-schema_1.0.0.json -d examples/resume.newformat.json -r 'schema/*.json'",
+    "test:cv": "ajv validate -s schema/cv-schema_1.0.0.json -d examples/cv.newformat.json -r 'schema/*.json'",
+    "test:doc": "ajv validate -s schema/doc-schema_1.0.0.json -d examples/doc.newformat.json -r 'schema/*.json'"
   },
   "keywords": [
     "resume",
